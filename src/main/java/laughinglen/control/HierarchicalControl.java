@@ -2,8 +2,6 @@ package laughinglen.control;
 
 import rx.Observable;
 
-import java.time.ZonedDateTime;
-
 import static com.google.common.base.Preconditions.checkNotNull;
 import static laughinglen.control.State.latest;
 

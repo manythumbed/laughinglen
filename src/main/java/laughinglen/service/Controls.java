@@ -1,6 +1,6 @@
 package laughinglen.service;
 
 public class Controls {
-	public static Control ACTIVE = () -> true;
-	public static Control INACTIVE = () -> false;
+	public static final Control ACTIVE = () -> true;
+	public static final Control INACTIVE = () -> false;
 }
