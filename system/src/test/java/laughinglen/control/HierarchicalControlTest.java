@@ -43,7 +43,6 @@ public class HierarchicalControlTest {
 		private boolean state;
 		private StateChanged callback;
 
-
 		private TestControl(final boolean state) {
 			this.state = state;
 		}
