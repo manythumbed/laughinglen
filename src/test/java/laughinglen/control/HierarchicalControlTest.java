@@ -9,8 +9,7 @@ import rx.subscriptions.Subscriptions;
 import java.time.Instant;
 import java.util.ArrayList;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.*;
+import static org.assertj.core.api.Assertions.*;
 
 public class HierarchicalControlTest {
 
@@ -21,7 +20,7 @@ public class HierarchicalControlTest {
 		final HierarchicalControl control = new HierarchicalControl(parent, child);
 
 		final State currentState = control.current();
-		assertThat(currentState.active, is(parent.state && child.state));
+		assertThat(currentState.active).isEqualTo(parent.state && child.state);
 
 		final ArrayList<State> changes = Lists.newArrayList();
 		final Subscription subscription = control.changes().subscribe(changes::add);
@@ -33,11 +32,11 @@ public class HierarchicalControlTest {
 
 		subscription.unsubscribe();
 
-		assertThat(changes.size(), is(4));
-		assertThat(changes.get(0).active, is(false));
-		assertThat(changes.get(1).active, is(true));
-		assertThat(changes.get(2).active, is(false));
-		assertThat(changes.get(2).active, is(false));
+		assertThat(changes.size()).isEqualTo(4);
+		assertThat(changes.get(0).active).isFalse();
+		assertThat(changes.get(1).active).isTrue();
+		assertThat(changes.get(2).active).isFalse();
+		assertThat(changes.get(2).active).isFalse();
 	}
 
 	private class TestControl implements Control {

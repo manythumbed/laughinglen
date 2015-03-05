@@ -2,8 +2,7 @@ package laughinglen.control;
 
 import org.junit.Test;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
+import static org.assertj.core.api.Assertions.*;
 
 public class ControlsTest {
 
@@ -11,7 +10,7 @@ public class ControlsTest {
 	public void shouldAlwaysBeActive() {
 		final Control control = Controls.active();
 
-		assertThat(control.current().active, is(true));
+		assertThat(control.current().active).isTrue();
 
 		final Flags flags = new Flags();
 		control.changes().subscribe(
@@ -20,16 +19,16 @@ public class ControlsTest {
 				() -> flags.completed = true
 		);
 
-		assertThat(flags.received, is(false));
-		assertThat(flags.errors, is(false));
-		assertThat(flags.completed, is(true));
+		assertThat(flags.received).isFalse();
+		assertThat(flags.errors).isFalse();
+		assertThat(flags.completed).isTrue();
 	}
 
 	@Test
 	public void shouldAlwaysBeInactive() {
 		final Control control = Controls.inactive();
 
-		assertThat(control.current().active, is(false));
+		assertThat(control.current().active).isFalse();
 
 		final Flags flags = new Flags();
 		control.changes().subscribe(
@@ -38,9 +37,9 @@ public class ControlsTest {
 				() -> flags.completed = true
 		);
 
-		assertThat(flags.received, is(false));
-		assertThat(flags.errors, is(false));
-		assertThat(flags.completed, is(true));
+		assertThat(flags.received).isFalse();
+		assertThat(flags.errors).isFalse();
+		assertThat(flags.completed).isTrue();
 	}
 
 	private class Flags {
