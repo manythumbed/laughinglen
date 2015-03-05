@@ -58,7 +58,6 @@ public class ArchaiusControlTest {
 		TimeUnit.MILLISECONDS.sleep(5);
 
 		assertThat(control.current().active).isTrue();
-		assertThat(control.current().active).isTrue();
 		assertThat(states.size()).isEqualTo(4);
 		assertThat(states.get(0).active).isFalse();
 		assertThat(states.get(1).active).isTrue();
