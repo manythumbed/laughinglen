@@ -11,8 +11,7 @@ import rx.Subscription;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.*;
+import static org.assertj.core.api.Assertions.*;
 
 public class ArchaiusControlTest {
 
@@ -28,7 +27,7 @@ public class ArchaiusControlTest {
 
 	@Test
 	public void shouldCreateSuccessfully() {
-		assertNotNull(new ArchaiusControl("test", DynamicPropertyFactory.getInstance()));
+		assertThat(new ArchaiusControl("test", DynamicPropertyFactory.getInstance())).isNotNull();
 	}
 
 	@Test
@@ -58,12 +57,13 @@ public class ArchaiusControlTest {
 		configuration.setProperty("test", true);
 		TimeUnit.MILLISECONDS.sleep(5);
 
-		assertThat(control.current().active, is(true));
-		assertThat(states.size(), is(4));
-		assertThat(states.get(0).active, is(false));
-		assertThat(states.get(1).active, is(true));
-		assertThat(states.get(2).active, is(false));
-		assertThat(states.get(3).active, is(true));
+		assertThat(control.current().active).isTrue();
+		assertThat(control.current().active).isTrue();
+		assertThat(states.size()).isEqualTo(4);
+		assertThat(states.get(0).active).isFalse();
+		assertThat(states.get(1).active).isTrue();
+		assertThat(states.get(2).active).isFalse();
+		assertThat(states.get(3).active).isTrue();
 
 		subscription.unsubscribe();
 
