@@ -1,5 +1,6 @@
 package examples.peekaboo;
 
+import examples.peekaboo.implementation.ServiceModule;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.*;

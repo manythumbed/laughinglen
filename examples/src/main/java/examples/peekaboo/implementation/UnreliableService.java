@@ -1,4 +1,7 @@
-package examples.peekaboo;
+package examples.peekaboo.implementation;
+
+import examples.peekaboo.PunchCard;
+import examples.peekaboo.Service;
 
 final class UnreliableService implements Service {
 	private final String valid;

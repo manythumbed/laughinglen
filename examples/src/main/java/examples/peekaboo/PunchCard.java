@@ -1,6 +1,6 @@
 package examples.peekaboo;
 
-public class PunchCard {
+public final class PunchCard {
 	public final String content;
 	public final boolean folded;
 	public final boolean spindled;

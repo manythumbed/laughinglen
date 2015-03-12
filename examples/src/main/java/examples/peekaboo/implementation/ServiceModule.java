@@ -1,7 +1,8 @@
-package examples.peekaboo;
+package examples.peekaboo.implementation;
 
 import dagger.Module;
 import dagger.Provides;
+import examples.peekaboo.Service;
 
 import javax.inject.Named;
 

@@ -1,5 +1,8 @@
-package examples.peekaboo;
+package examples.peekaboo.implementation;
 
+import examples.peekaboo.PunchCard;
+import examples.peekaboo.Service;
+import examples.peekaboo.implementation.UnreliableService;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
