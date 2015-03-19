@@ -1,6 +1,7 @@
 package laughinglen.domain;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import laughinglen.domain.store.Cache;
 import laughinglen.domain.store.Snapshot;
 import laughinglen.domain.store.Store;
@@ -14,19 +15,20 @@ import laughinglen.domain.testing.TestRoot;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Map;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.*;
 
 public class RepositoryTest {
 	private Store store;
-	private Cache<TestRoot, TestId> cache;
+	private WrappedCache<TestRoot, TestId> cache;
 	private Repository<TestRoot, TestId> repository;
 
 	@Before
 	public void setUp()	{
 		store = new MemoryStore();
-		cache = new MemoryCache<>();
+		cache = new WrappedCache<>(new MemoryCache<>());
 		repository = new TestRepository(store, cache);
 	}
 
@@ -81,9 +83,33 @@ public class RepositoryTest {
 		assertThat(store.store(id, new Version(3), Lists.newArrayList(event, event)).succeeded).isTrue();
 
 		final Optional<TestRoot> cached = repository.fetch(id);
+		assertThat(cache.hits.get(id)).isEqualTo(1);
 		assertThat(cached).isNotNull();
 		assertThat(cached.isPresent()).isTrue();
 		assertThat(cached.get().count()).isEqualTo(5);
+	}
+
+	private class WrappedCache<T extends Root, I extends Id> implements Cache<T, I>	{
+		private final Cache<T, I> cache;
+		final Map<Id, Integer> hits = Maps.newHashMap();
+
+		private WrappedCache(final Cache<T, I> cache) {
+			this.cache = cache;
+		}
+
+		@Override
+		public Optional<Snapshot<T>> fetch(final I id) {
+			final Optional<Snapshot<T>> fetch = cache.fetch(id);
+			if(fetch.isPresent())	{
+				hits.merge(id, 1, (v, n) -> v + n );
+			}
+			return fetch;
+		}
+
+		@Override
+		public void store(final I id, final Snapshot<T> snapshot) {
+			cache.store(id, snapshot);
+		}
 	}
 
 	private class BadEvent extends Event {
