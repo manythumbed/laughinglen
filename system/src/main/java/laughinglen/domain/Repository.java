@@ -13,7 +13,7 @@ public abstract class Repository<T extends Root, I extends Id>	{
 		this.store = store;
 	}
 
-	public Optional<T> fetch(final I id)	{
+	public final Optional<T> fetch(final I id)	{
 		final EventStream stream = store.stream(id);
 		if(!stream.exists())	{
 			return Optional.empty();
@@ -24,7 +24,7 @@ public abstract class Repository<T extends Root, I extends Id>	{
 		return Optional.of(fetched);
 	}
 
-	public boolean save(final Id id, final T root)	{
+	public final boolean save(final Id id, final T root)	{
 		final Status status = store.store(id, root.version, root.changes);
 
 		return status.succeeded;

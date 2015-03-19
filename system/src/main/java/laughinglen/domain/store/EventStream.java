@@ -14,7 +14,7 @@ public final class EventStream {
 
 	public EventStream(final Version version, final List<Event> events) {
 		this.version = checkNotNull(version);
-		this.events = ImmutableList.copyOf(events);
+		this.events = ImmutableList.copyOf(checkNotNull(events));
 	}
 
 	public boolean exists()	{
