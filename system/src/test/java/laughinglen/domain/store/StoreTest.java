@@ -2,7 +2,7 @@ package laughinglen.domain.store;
 
 import com.google.common.collect.Lists;
 import laughinglen.domain.Event;
-import laughinglen.domain.TestId;
+import laughinglen.domain.testing.TestId;
 import laughinglen.domain.store.memory.MemoryStore;
 import org.junit.Test;
 
