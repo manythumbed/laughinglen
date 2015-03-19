@@ -8,7 +8,7 @@ import java.util.List;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-public class NotifyingStore implements Store {
+public final class NotifyingStore implements Store {
 	private final Store store;
 	private final Notifier notifier;
 

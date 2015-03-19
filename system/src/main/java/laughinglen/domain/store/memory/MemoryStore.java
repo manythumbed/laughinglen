@@ -14,7 +14,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-public class MemoryStore implements Store {
+public final class MemoryStore implements Store {
 	private final Map<Id, List<Event>> map = Collections.synchronizedMap(Maps.newHashMap());
 
 	@Override
