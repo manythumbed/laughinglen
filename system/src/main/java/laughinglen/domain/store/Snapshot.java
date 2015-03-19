@@ -4,7 +4,7 @@ import laughinglen.domain.Root;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-public class Snapshot<T extends Root> {
+public final class Snapshot<T extends Root> {
 	public final T value;
 	public final Version version;
 
