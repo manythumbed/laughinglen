@@ -15,6 +15,7 @@
 	<modules>
 		<module>system</module>
 		<module>examples</module>
+		<module>kafka</module>
 	</modules>
 
 	<dependencyManagement>
