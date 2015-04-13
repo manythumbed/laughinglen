@@ -11,7 +11,7 @@ public class ServiceModuleTest {
 	@Test
 	public void shouldBeUsableInComponent()	{
 		final String check = "check";
-		final Checker checker = Dagger_TestComponent.builder().serviceModule(new ServiceModule(check)).build().checker();
+		final Checker checker = DaggerTestComponent.builder().serviceModule(new ServiceModule(check)).build().checker();
 
 		final PunchCard wrong = new PunchCard.Builder("wrong").build();
 		final PunchCard wrongFolded = new PunchCard.Builder("wrong").fold().build();
