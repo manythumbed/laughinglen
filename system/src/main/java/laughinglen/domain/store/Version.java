@@ -32,6 +32,6 @@ public final class Version {
 	}
 
 
-	public static Version ZERO = new Version(0);
+	public static final Version ZERO = new Version(0);
 
 }
