@@ -2,13 +2,11 @@ package laughinglen.domain.store;
 
 import com.google.common.collect.Lists;
 import laughinglen.domain.Event;
-import laughinglen.domain.Id;
-import laughinglen.domain.Notifier;
-import laughinglen.domain.testing.TestId;
 import laughinglen.domain.store.memory.MemoryStore;
+import laughinglen.domain.testing.TestId;
 import org.junit.Test;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class StoreTest {
 	@Test
