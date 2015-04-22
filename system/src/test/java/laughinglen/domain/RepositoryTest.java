@@ -33,6 +33,12 @@ public class RepositoryTest {
 	}
 
 	@Test
+	public void shouldReturnAbsentIFNotFound()	{
+		final Optional<TestRoot> fetched = repository.fetch(new TestId("1"));
+		assertThat(fetched.isPresent()).isFalse();
+	}
+
+	@Test
 	public void shouldStoreRoot() {
 		final TestRoot root = new TestRoot();
 		final TestId id = new TestId("1");

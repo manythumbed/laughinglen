@@ -2,6 +2,8 @@ package laughinglen.domain.store;
 
 import com.google.common.collect.Lists;
 import laughinglen.domain.Event;
+import laughinglen.domain.Id;
+import laughinglen.domain.Notifier;
 import laughinglen.domain.testing.TestId;
 import laughinglen.domain.store.memory.MemoryStore;
 import org.junit.Test;
@@ -12,6 +14,7 @@ public class StoreTest {
 	@Test
 	public void shouldTestStoreImplementations() {
 		checkStore(new MemoryStore());
+		checkStore(new NotifyingStore(new MemoryStore(), (id, event) -> { }));
 	}
 
 	private void checkStore(final Store store) {
@@ -21,6 +24,7 @@ public class StoreTest {
 		incorrectVersionOfStreamIsNotStored(store);
 		streamIsStoredAndRetrieved(store);
 		partialStreamIsRetrieved(store);
+		willNotStoreVersionGreaterThanZeroIfNotFound(store);
 	}
 
 	private void missingStreamReturnsEmptyStream(final Store store) {
@@ -127,6 +131,12 @@ public class StoreTest {
 		assertThat(emptyStream.exists()).isTrue();
 		assertThat(emptyStream.version).isEqualTo(new Version(2l));
 		assertThat(emptyStream.events.isEmpty()).isTrue();
+	}
+
+	private void willNotStoreVersionGreaterThanZeroIfNotFound(final Store store)	{
+		final Status status = store.store(new TestId("A"), new Version(123l), Lists.newArrayList(new TestEvent1(12)));
+		assertThat(status.succeeded).isFalse();
+		assertThat(status.version).isEqualTo(Version.ZERO);
 	}
 
 	private class TestEvent1 extends Event {
