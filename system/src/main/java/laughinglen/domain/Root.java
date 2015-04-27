@@ -12,6 +12,11 @@ public abstract class Root {
 	final List<Event> changes = Lists.newArrayList();
 	Version version = Version.ZERO;
 
+	final void storeSucceeded(final Version stored)	{
+		version = stored;
+		changes.clear();
+	}
+
 	protected final void update(final EventStream stream) {
 		version = stream.version;
 		stream.events.forEach(this::apply);

@@ -50,6 +50,9 @@ public abstract class Repository<T extends Root, I extends Id>	{
 
 	public final boolean save(final Id id, final T root)	{
 		final Status status = store.store(id, root.version, root.changes);
+		if(status.succeeded)	{
+			root.storeSucceeded(status.version);
+		}
 
 		return status.succeeded;
 	}

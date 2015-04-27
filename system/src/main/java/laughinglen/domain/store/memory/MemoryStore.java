@@ -47,7 +47,7 @@ public final class MemoryStore implements Store {
 			if (!version.check(0l)) {
 				return Status.failed(Version.ZERO);
 			}
-			map.put(id, events);
+			map.put(id, Lists.newArrayList(events));
 			return Status.succeeded(new Version(events.size()));
 		}
 

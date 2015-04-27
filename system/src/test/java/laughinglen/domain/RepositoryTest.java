@@ -95,6 +95,21 @@ public class RepositoryTest {
 		assertThat(cached.get().count()).isEqualTo(5);
 	}
 
+	@Test
+	public void shouldIncrementVersionCorrectly()	{
+		final TestRoot root = new TestRoot();
+		final TestId id = new TestId("1");
+		assertThat(repository.save(id, root)).isFalse();
+
+		root.increment();
+		assertThat(repository.save(id, root)).isTrue();
+
+		root.increment();
+		assertThat(repository.save(id, root)).isTrue();
+		assertThat(repository.save(id, root)).isFalse();
+
+	}
+
 	private class WrappedCache<T extends Root, I extends Id> implements Cache<T, I>	{
 		private final Cache<T, I> cache;
 		final Map<Id, Integer> hits = Maps.newHashMap();
