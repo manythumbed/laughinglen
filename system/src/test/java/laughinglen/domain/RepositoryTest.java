@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import laughinglen.domain.store.Cache;
 import laughinglen.domain.store.Snapshot;
+import laughinglen.domain.store.SnapshotPolicies;
 import laughinglen.domain.store.Store;
 import laughinglen.domain.store.Version;
 import laughinglen.domain.store.memory.MemoryCache;
@@ -107,7 +108,17 @@ public class RepositoryTest {
 		root.increment();
 		assertThat(repository.save(id, root)).isTrue();
 		assertThat(repository.save(id, root)).isFalse();
+	}
 
+	@Test
+	public void shouldStoreSnapshot()	{
+		repository = new TestRepository(store, cache, SnapshotPolicies.always());
+		final TestRoot root = new TestRoot();
+		final TestId id = new TestId("1");
+
+		root.increment();
+		assertThat(repository.save(id, root)).isTrue();
+		assertThat(cache.fetch(id).isPresent()).isTrue();
 	}
 
 	private class WrappedCache<T extends Root, I extends Id> implements Cache<T, I>	{
