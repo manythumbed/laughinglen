@@ -4,7 +4,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import laughinglen.domain.store.Cache;
 import laughinglen.domain.store.Snapshot;
-import laughinglen.domain.store.SnapshotPolicies;
+import laughinglen.domain.store.SnapshotPolicy;
 import laughinglen.domain.store.Store;
 import laughinglen.domain.store.Version;
 import laughinglen.domain.store.memory.MemoryCache;
@@ -112,7 +112,7 @@ public class RepositoryTest {
 
 	@Test
 	public void shouldStoreSnapshot()	{
-		repository = new TestRepository(store, cache, SnapshotPolicies.always());
+		repository = new TestRepository(store, cache, SnapshotPolicy.always());
 		final TestRoot root = new TestRoot();
 		final TestId id = new TestId("1");
 

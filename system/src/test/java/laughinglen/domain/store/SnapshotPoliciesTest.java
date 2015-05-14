@@ -14,7 +14,7 @@ public class SnapshotPoliciesTest {
 
 	@Test
 	public void shouldNeverSnapshot() {
-		final SnapshotPolicy never = SnapshotPolicies.never();
+		final SnapshotPolicy never = SnapshotPolicy.never();
 
 		assertThat(never.snapshot(Version.ZERO)).isFalse();
 		assertThat(never.snapshot(new Version(1l))).isFalse();
@@ -23,7 +23,7 @@ public class SnapshotPoliciesTest {
 
 	@Test
 	public void shouldAlwaysSnapshot() {
-		final SnapshotPolicy always = SnapshotPolicies.always();
+		final SnapshotPolicy always = SnapshotPolicy.always();
 
 		assertThat(always.snapshot(Version.ZERO)).isTrue();
 		assertThat(always.snapshot(new Version(1l))).isTrue();
@@ -32,7 +32,7 @@ public class SnapshotPoliciesTest {
 
 	@Test
 	public void shouldSnapshotOnInterval()	{
-		final SnapshotPolicy interval = SnapshotPolicies.every(7);
+		final SnapshotPolicy interval = SnapshotPolicy.every(7);
 
 		assertThat(interval.snapshot(Version.ZERO)).isFalse();
 		assertThat(interval.snapshot(new Version(6))).isFalse();
